@@ -44,6 +44,8 @@
         .project-card {
             background-color: white;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block; /* Default display for cards */
+            flex-direction: column; /* Ensure content stacks vertically */
         }
         .project-card:hover {
             transform: translateY(-8px);
@@ -169,6 +171,28 @@
         /* Animation on scroll */
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Filter Button Styles */
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--gray);
+            background-color: var(--gray-light);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .filter-btn:hover {
+            color: var(--foreground);
+            background-color: #e5e7eb; /* A slighly darker gray */
+        }
+        .filter-btn.active {
+            color: white;
+            background-color: var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -178,8 +202,8 @@
             <div class="max-w-8xl mx-auto px-6 sm:px-10 flex justify-between items-center py-4 border-b border-gray-100">
                 <a href="#sobre-mi" class="flex items-center space-x-2 group">
                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black group-hover:text-indigo-600 transition-colors">
-                         <path d="M8 3V15.5C8 16.8807 9.11929 18 10.5 18H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M16 21L16 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M8 3V15.5C8 16.8807 9.11929 18 10.5 18H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M16 21L16 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                      </svg>
                 </a>
                 
@@ -248,18 +272,28 @@
                 </section>
                 
                 <section id="proyectos" class="mb-20">
-                    <div class="flex justify-between items-center mb-8 reveal">
-                        <h3 class="text-sm font-bold tracking-widest uppercase">Proyectos Destacados</h3>
+                    <!-- Project Filter Buttons -->
+                    <div id="project-filter" class="flex flex-wrap justify-center items-center mb-10 gap-x-4 gap-y-2 reveal">
+                        <button data-filter="all" class="filter-btn active">Todos</button>
+                        <button data-filter="trabajo" class="filter-btn">Trabajos</button>
+                        <button data-filter="proyecto" class="filter-btn">Proyectos</button>
+                        <button data-filter="diseno" class="filter-btn">Diseños</button>
                     </div>
+
                     <div class="relative group">
                         <button id="scroll-btn-left" class="absolute top-1/2 -translate-y-1/2 -left-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-left-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
                             <i data-feather="arrow-left" class="h-6 w-6"></i>
                         </button>
                         <div id="horizontal-container" class="flex items-stretch overflow-x-auto space-x-10 horizontal-scroll pb-10 scroll-smooth">
-                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
-                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/JL-dev" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <!-- (Trabajo) -->
+                            <div data-category="trabajo" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
+                            <!--  (Proyecto) -->
+                            <div data-category="proyecto" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div data-category="proyecto" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <!--  (Diseño) -->
+                            <div data-category="diseno" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/JL-dev" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div data-category="diseno" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="05.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño</p><h4 class="text-2xl font-bold mt-1">Portafolio Creativo de Diseño y Desarrollo</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a><a href="https://jordylizana.github.io/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a></div></div>
+
                         </div>
                         <button id="scroll-btn-right" class="absolute top-1/2 -translate-y-1/2 -right-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-right-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
                             <i data-feather="arrow-right" class="h-6 w-6"></i>
@@ -354,11 +388,11 @@
                      <div class="flex flex-col justify-end items-start md:items-end text-left md:text-right">
                          <p class="text-lg font-bold">Información de Contacto</p>
                          <p class="text-gray-300 mt-2">Región Metropolitana, Chile</p>
-                          <div class="flex items-center space-x-6 mt-4">
-                               <a href="https://github.com/JordyLizana" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                               <a href="https://www.linkedin.com/in/jordy-lizana-alvarez-27a08b223" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                          </div>
-                     </div>
+                         <div class="flex items-center space-x-6 mt-4">
+                              <a href="https://github.com/JordyLizana" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                              <a href="https://www.linkedin.com/in/jordy-lizana-alvarez-27a08b223" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                         </div>
+                    </div>
                 </div>
                  <div class="mt-16 pt-6 border-t border-gray-800 text-sm text-center text-gray-500">
                      <p>Diseñado y desarrollado por Jordy Lizana Álvarez.</p>
@@ -371,7 +405,6 @@
     <script>
         feather.replace();
 
-        // --- Smooth scroll, mobile menu, and other functionalities ---
         document.addEventListener('DOMContentLoaded', function() {
             // --- Mobile Menu Toggle ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -380,17 +413,15 @@
 
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
-                // Toggle icon between menu and x
                 const isMenuOpen = !mobileMenu.classList.contains('hidden');
                 mobileMenuIcon.setAttribute('data-feather', isMenuOpen ? 'x' : 'menu');
-                feather.replace(); // Re-render icons
+                feather.replace();
             });
 
             // --- Smooth Scrolling for all anchor links ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
 
@@ -400,44 +431,65 @@
                             block: 'start'
                         });
 
-                        // Close mobile menu on navigation
                         if (!mobileMenu.classList.contains('hidden')) {
-                           mobileMenu.classList.add('hidden');
-                           mobileMenuIcon.setAttribute('data-feather', 'menu');
-                           feather.replace();
+                            mobileMenu.classList.add('hidden');
+                            mobileMenuIcon.setAttribute('data-feather', 'menu');
+                            feather.replace();
                         }
                     }
                 });
             });
 
-
-            // --- Horizontal scroll for Projects ---
+            // --- Horizontal Scroll & Project Filtering ---
             const scrollBtnLeft = document.getElementById('scroll-btn-left');
             const scrollBtnRight = document.getElementById('scroll-btn-right');
             const horizontalContainer = document.getElementById('horizontal-container');
+            
             if (horizontalContainer) {
-                const handleScrollButtons = () => {
-                    const isNotScrollable = horizontalContainer.scrollWidth <= horizontalContainer.clientWidth;
-                    if (isNotScrollable) {
-                        scrollBtnLeft.classList.add('hidden');
-                        scrollBtnRight.classList.add('hidden');
-                        return;
-                    }
-                    scrollBtnLeft.classList.remove('hidden');
-                    scrollBtnRight.classList.remove('hidden');
-                    
-                    scrollBtnLeft.disabled = horizontalContainer.scrollLeft <= 0;
-                    scrollBtnRight.disabled = horizontalContainer.scrollLeft + horizontalContainer.clientWidth >= horizontalContainer.scrollWidth - 2;
-                };
+                const projectCards = document.querySelectorAll('#horizontal-container .project-card');
+                const filterButtons = document.querySelectorAll('#project-filter .filter-btn');
 
+                const handleScrollButtonsState = () => {
+                    setTimeout(() => {
+                        const isNotScrollable = horizontalContainer.scrollWidth <= horizontalContainer.clientWidth;
+                        const parentGroup = horizontalContainer.parentElement;
+
+                        if (isNotScrollable) {
+                            parentGroup.classList.remove('group');
+                        } else {
+                            parentGroup.classList.add('group');
+                        }
+                        
+                        scrollBtnLeft.disabled = horizontalContainer.scrollLeft <= 0;
+                        scrollBtnRight.disabled = horizontalContainer.scrollLeft + horizontalContainer.clientWidth >= horizontalContainer.scrollWidth - 1;
+                    }, 50);
+                };
+                
                 scrollBtnLeft.addEventListener('click', () => { horizontalContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
                 scrollBtnRight.addEventListener('click', () => { horizontalContainer.scrollBy({ left: 360, behavior: 'smooth' }); });
-                horizontalContainer.addEventListener('scroll', handleScrollButtons);
-                
-                window.addEventListener('load', handleScrollButtons);
-                window.addEventListener('resize', handleScrollButtons);
-            }
+                horizontalContainer.addEventListener('scroll', handleScrollButtonsState);
+                window.addEventListener('resize', handleScrollButtonsState);
 
+                // --- Filter Logic ---
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const filterValue = button.dataset.filter;
+                        
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+
+                        projectCards.forEach(card => {
+                            card.style.display = (filterValue === 'all' || card.dataset.category === filterValue) ? 'flex' : 'none';
+                        });
+
+                        horizontalContainer.scrollLeft = 0;
+                        handleScrollButtonsState();
+                    });
+                });
+                
+                // Initial state on load
+                handleScrollButtonsState();
+            }
 
             // --- Tabs functionality ---
             function setupTabs(containerId) {
