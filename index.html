@@ -41,14 +41,30 @@
         .horizontal-scroll::-webkit-scrollbar {
             display: none;
         }
+        
+        /* --- Styles for Project Card Filtering --- */
         .project-card {
             background-color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: block; /* Default display for cards */
-            flex-direction: column; /* Ensure content stacks vertically */
+            flex-shrink: 0;
+            width: 20rem; /* w-80 */
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.4s ease, transform 0.4s ease, width 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), margin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .project-card.filtered-out {
+            opacity: 0;
+            transform: scale(0.85);
+            width: 0;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            overflow: hidden;
+            border: 0;
+        }
+        
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.0); /* Adjusted hover transform */
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .project-card-image {
@@ -186,7 +202,7 @@
         }
         .filter-btn:hover {
             color: var(--foreground);
-            background-color: #e5e7eb; /* A slighly darker gray */
+            background-color: #e5e7eb;
         }
         .filter-btn.active {
             color: white;
@@ -272,32 +288,37 @@
                 </section>
                 
                 <section id="proyectos" class="mb-20">
-                    <!-- Project Filter Buttons -->
-                    <div id="project-filter" class="flex flex-wrap justify-center items-center mb-10 gap-x-4 gap-y-2 reveal">
-                        <button data-filter="all" class="filter-btn active">Todos</button>
-                        <button data-filter="trabajo" class="filter-btn">Trabajos</button>
-                        <button data-filter="proyecto" class="filter-btn">Proyectos</button>
-                        <button data-filter="diseno" class="filter-btn">Diseños</button>
+                    <div class="flex justify-center items-center gap-4 mb-8 reveal">
+                         <!-- Scroll Left Button - Desktop Only -->
+                        <button id="scroll-btn-left" class="hidden lg:flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i data-feather="arrow-left" class="h-5 w-5"></i>
+                        </button>
+                        
+                        <!-- Project Filter Buttons -->
+                        <div id="project-filter" class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+                            <button data-filter="all" class="filter-btn active">Todos</button>
+                            <button data-filter="trabajo" class="filter-btn">Trabajos</button>
+                            <button data-filter="proyecto" class="filter-btn">Proyectos</button>
+                            <button data-filter="diseno" class="filter-btn">Diseños</button>
+                        </div>
+
+                        <!-- Scroll Right Button - Desktop Only -->
+                        <button id="scroll-btn-right" class="hidden lg:flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i data-feather="arrow-right" class="h-5 w-5"></i>
+                        </button>
                     </div>
 
-                    <div class="relative group">
-                        <button id="scroll-btn-left" class="absolute top-1/2 -translate-y-1/2 -left-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-left-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
-                            <i data-feather="arrow-left" class="h-6 w-6"></i>
-                        </button>
-                        <div id="horizontal-container" class="flex items-stretch overflow-x-auto space-x-10 horizontal-scroll pb-10 scroll-smooth">
+                    <div class="relative">
+                        <div id="horizontal-container" class="flex items-stretch overflow-x-auto gap-x-10 horizontal-scroll pb-10 scroll-smooth">
                             <!-- (Trabajo) -->
-                            <div data-category="trabajo" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
-                            <!--  (Proyecto) -->
-                            <div data-category="proyecto" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div data-category="proyecto" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <!--  (Diseño) -->
-                            <div data-category="diseno" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/JL-dev" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div data-category="diseno" class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="05.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño</p><h4 class="text-2xl font-bold mt-1">Portafolio Creativo de Diseño y Desarrollo</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a><a href="https://jordylizana.github.io/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a></div></div>
-
+                            <div data-category="trabajo" class="project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
+                            <!-- (Proyecto) -->
+                            <div data-category="proyecto" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div data-category="proyecto" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <!-- (Diseño) -->
+                            <div data-category="diseno" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/JL-dev" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div data-category="diseno" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="05.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño</p><h4 class="text-2xl font-bold mt-1">Portafolio Creativo</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a><a href="https://jordylizana.github.io/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a></div></div>
                         </div>
-                        <button id="scroll-btn-right" class="absolute top-1/2 -translate-y-1/2 -right-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-right-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
-                            <i data-feather="arrow-right" class="h-6 w-6"></i>
-                        </button>
                     </div>
                 </section>
     
@@ -450,19 +471,22 @@
                 const filterButtons = document.querySelectorAll('#project-filter .filter-btn');
 
                 const handleScrollButtonsState = () => {
+                    // Use a short timeout to allow the DOM to update after filtering
                     setTimeout(() => {
-                        const isNotScrollable = horizontalContainer.scrollWidth <= horizontalContainer.clientWidth;
-                        const parentGroup = horizontalContainer.parentElement;
-
-                        if (isNotScrollable) {
-                            parentGroup.classList.remove('group');
-                        } else {
-                            parentGroup.classList.add('group');
+                        const isScrollable = horizontalContainer.scrollWidth > horizontalContainer.clientWidth;
+                        
+                        scrollBtnLeft.style.display = isScrollable ? '' : 'none';
+                        scrollBtnRight.style.display = isScrollable ? '' : 'none';
+                        
+                        // This media query check ensures they are hidden on mobile regardless
+                        if (window.innerWidth < 1024) {
+                            scrollBtnLeft.style.display = 'none';
+                            scrollBtnRight.style.display = 'none';
                         }
                         
                         scrollBtnLeft.disabled = horizontalContainer.scrollLeft <= 0;
                         scrollBtnRight.disabled = horizontalContainer.scrollLeft + horizontalContainer.clientWidth >= horizontalContainer.scrollWidth - 1;
-                    }, 50);
+                    }, 500); // Increased timeout to match CSS transition
                 };
                 
                 scrollBtnLeft.addEventListener('click', () => { horizontalContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
@@ -479,10 +503,14 @@
                         button.classList.add('active');
 
                         projectCards.forEach(card => {
-                            card.style.display = (filterValue === 'all' || card.dataset.category === filterValue) ? 'flex' : 'none';
+                             if (filterValue === 'all' || card.dataset.category === filterValue) {
+                                card.classList.remove('filtered-out');
+                            } else {
+                                card.classList.add('filtered-out');
+                            }
                         });
 
-                        horizontalContainer.scrollLeft = 0;
+                        horizontalContainer.scrollLeft = 0; // Reset scroll on filter change
                         handleScrollButtonsState();
                     });
                 });
