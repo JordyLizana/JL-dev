@@ -41,30 +41,25 @@
         .horizontal-scroll::-webkit-scrollbar {
             display: none;
         }
-        
-        /* --- Styles for Project Card Filtering --- */
         .project-card {
             background-color: white;
-            flex-shrink: 0;
-            width: 20rem; /* w-80 */
+            width: 20rem;      
             display: flex;
             flex-direction: column;
-            transition: opacity 0.4s ease, transform 0.4s ease, width 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), margin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.4s ease, transform 0.4s ease, width 0.4s ease, margin 0.4s ease, padding 0.4s ease;
         }
         .project-card.filtered-out {
             opacity: 0;
-            transform: scale(0.85);
-            width: 0;
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
+            transform: scale(0.8);
+            width: 0 !important;
+            min-width: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: 0 !important;
             overflow: hidden;
-            border: 0;
         }
-        
         .project-card:hover {
-            transform: translateY(-8px) scale(1.0); /* Adjusted hover transform */
+            transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .project-card-image {
@@ -83,8 +78,6 @@
             user-select: none;
             position: relative;
         }
-        
-        /* Glitch Effect */
         .glitch-effect, .glitch-vertical {
             position: relative;
             font-weight: 900;
@@ -113,16 +106,12 @@
             text-shadow: -2px 0 var(--pink);
             animation: glitch-anim-2 2s infinite linear alternate-reverse;
         }
-
         @keyframes glitch-anim-1 {
             0% { clip-path: inset(45% 0 50% 0); } 5% { clip-path: inset(85% 0 2% 0); } 10% { clip-path: inset(65% 0 25% 0); } 15% { clip-path: inset(30% 0 62% 0); } 20% { clip-path: inset(95% 0 2% 0); } 25% { clip-path: inset(40% 0 55% 0); } 30% { clip-path: inset(70% 0 22% 0); } 35% { clip-path: inset(85% 0 10% 0); } 40% { clip-path: inset(25% 0 70% 0); } 45% { clip-path: inset(90% 0 5% 0); } 50% { clip-path: inset(2% 0 90% 0); } 55% { clip-path: inset(55% 0 35% 0); } 60% { clip-path: inset(10% 0 85% 0); } 65% { clip-path: inset(75% 0 5% 0); } 70% { clip-path: inset(20% 0 75% 0); } 75% { clip-path: inset(60% 0 30% 0); } 80% { clip-path: inset(90% 0 8% 0); } 85% { clip-path: inset(15% 0 80% 0); } 90% { clip-path: inset(50% 0 42% 0); } 95% { clip-path: inset(22% 0 70% 0); } 100% { clip-path: inset(80% 0 15% 0); }
         }
-
         @keyframes glitch-anim-2 {
             0% { clip-path: inset(95% 0 2% 0); } 5% { clip-path: inset(5% 0 92% 0); } 10% { clip-path: inset(80% 0 5% 0); } 15% { clip-path: inset(40% 0 58% 0); } 20% { clip-path: inset(15% 0 82% 0); } 25% { clip-path: inset(70% 0 20% 0); } 30% { clip-path: inset(90% 0 8% 0); } 35% { clip-path: inset(10% 0 88% 0); } 40% { clip-path: inset(50% 0 45% 0); } 45% { clip-path: inset(20% 0 75% 0); } 50% { clip-path: inset(88% 0 2% 0); } 55% { clip-path: inset(35% 0 60% 0); } 60% { clip-path: inset(70% 0 25% 0); } 65% { clip-path: inset(5% 0 90% 0); } 70% { clip-path: inset(85% 0 10% 0); } 75% { clip-path: inset(30% 0 65% 0); } 80% { clip-path: inset(10% 0 82% 0); } 85% { clip-path: inset(65% 0 30% 0); } 90% { clip-path: inset(92% 0 5% 0); } 95% { clip-path: inset(28% 0 70% 0); } 100% { clip-path: inset(10% 0 85% 0); }
         }
-
-        /* Marquee styles */
         .marquee-wrapper {
             background-color: #000;
             position: relative;
@@ -152,10 +141,7 @@
             color: white;
             filter: drop-shadow(0 0 8px var(--indigo));
         }
-
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* Tabs Styles */
         .tab-button {
             transition: all 0.2s ease;
             position: relative;
@@ -183,12 +169,8 @@
             display: block;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Animation on scroll */
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* Filter Button Styles */
         .filter-btn {
             padding: 0.5rem 1.25rem;
             border-radius: 9999px;
@@ -217,13 +199,12 @@
         <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md">
             <div class="max-w-8xl mx-auto px-6 sm:px-10 flex justify-between items-center py-4 border-b border-gray-100">
                 <a href="#sobre-mi" class="flex items-center space-x-2 group">
-                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black group-hover:text-indigo-600 transition-colors">
-                          <path d="M8 3V15.5C8 16.8807 9.11929 18 10.5 18H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M16 21L16 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                     </svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black group-hover:text-indigo-600 transition-colors">
+                            <path d="M8 3V15.5C8 16.8807 9.11929 18 10.5 18H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 21L16 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                       </svg>
                 </a>
                 
-                <!-- Desktop Menu -->
                 <nav class="hidden lg:flex items-center space-x-10 text-sm font-bold tracking-widest uppercase">
                     <a href="#proyectos" class="text-gray-500 hover:text-black transition-colors">Proyectos</a>
                     <a href="#experiencia" class="text-gray-500 hover:text-black transition-colors">Experiencia</a>
@@ -234,7 +215,6 @@
                     <i data-feather="mail" class="h-6 w-6 text-gray-500 group-hover:text-black transition-colors"></i>
                 </a>
 
-                <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
                     <button id="mobile-menu-button" class="text-black">
                         <i data-feather="menu" class="h-7 w-7"></i>
@@ -242,7 +222,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-lg">
                 <nav class="flex flex-col items-center space-y-6 py-8 text-lg font-bold">
                     <a href="#proyectos" class="text-gray-600 hover:text-black transition-colors">Proyectos</a>
@@ -255,7 +234,7 @@
 
         <main class="pt-24 lg:pt-32">
             <div class="px-6 sm:px-10 max-w-8xl mx-auto">
-                <section id="sobre-mi" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative mb-20">
+                <section id="sobre-mi" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative mb-12">
                     <div class="reveal text-center lg:text-left">
                         <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter glitch-effect" data-text="Desarrollador Web">Desarrollador Web</h2>
                         <p class="mt-6 text-gray-500 max-w-lg mx-auto lg:mx-0">Estudiante de último año de Ingeniería en Informática con enfoque en desarrollo web, optimización SEO y manejo de datos. Mi objetivo es integrarme a equipos de tecnología para aportar valor y continuar mi desarrollo profesional.</p>
@@ -287,72 +266,42 @@
                     </div>
                 </section>
                 
-                <section id="proyectos" class="mb-20">
+                <section id="proyectos" class="mb-12">
                     <div class="flex justify-center items-center gap-4 mb-8 reveal">
-                         <!-- Scroll Left Button - Desktop Only -->
                         <button id="scroll-btn-left" class="hidden lg:flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                             <i data-feather="arrow-left" class="h-5 w-5"></i>
                         </button>
                         
-                        <!-- Project Filter Buttons -->
-                        <div id="project-filter" class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+                        <div id="project-filter" class="flex flex-wrap justify-start items-center gap-x-4 gap-y-2">
                             <button data-filter="all" class="filter-btn active">Todos</button>
                             <button data-filter="trabajo" class="filter-btn">Trabajos</button>
                             <button data-filter="proyecto" class="filter-btn">Proyectos</button>
                             <button data-filter="diseno" class="filter-btn">Diseños</button>
                         </div>
 
-                        <!-- Scroll Right Button - Desktop Only -->
                         <button id="scroll-btn-right" class="hidden lg:flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                             <i data-feather="arrow-right" class="h-5 w-5"></i>
                         </button>
                     </div>
 
                     <div class="relative">
-                        <div id="horizontal-container" class="flex items-stretch overflow-x-auto gap-x-10 horizontal-scroll pb-10 scroll-smooth">
-                            <!-- (Trabajo) -->
-                            <div data-category="trabajo" class="project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
-                            <!-- (Proyecto) -->
-                            <div data-category="proyecto" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div data-category="proyecto" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <!-- (Diseño) -->
-                            <div data-category="diseno" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/JL-dev" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
-                            <div data-category="diseno" class="project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="05.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño</p><h4 class="text-2xl font-bold mt-1">Portafolio Creativo</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a><a href="https://jordylizana.github.io/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a></div></div>
+                        <div id="projects-container" class="overflow-x-auto horizontal-scroll pb-10 scroll-smooth">
+                            <div class="inline-flex gap-x-10">
+                            </div>
                         </div>
                     </div>
                 </section>
     
-                <!-- Elegant Separator -->
-                <div class="flex justify-center items-center my-20 reveal">
-                    <svg width="300" height="20" viewBox="0 0 300 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-900">
-                        <path d="M0 10H120" stroke="url(#grad1)" stroke-width="1.5"/>
-                        <path d="M180 10H300" stroke="url(#grad2)" stroke-width="1.5"/>
-                        <path d="M125 5C138.807 5 150 7.23858 150 10C150 12.7614 138.807 15 125 15C111.193 15 100 12.7614 100 10C100 7.23858 111.193 5 125 5Z" fill="currentColor" opacity="0.1"/>
-                        <path d="M129.742 14.3273C135.536 12.4182 143.435 10.8727 150 10.8727C156.565 10.8727 164.464 12.4182 170.258 14.3273M129.742 5.67273C135.536 7.58182 143.435 9.12727 150 9.12727C156.565 9.12727 164.464 7.58182 170.258 5.67273" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <defs>
-                            <linearGradient id="grad1" x1="120" y1="10" x2="0" y2="10" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="currentColor"/>
-                                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
-                            </linearGradient>
-                             <linearGradient id="grad2" x1="180" y1="10" x2="300" y2="10" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="currentColor"/>
-                                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-    
-    
-                <section id="experiencia" class="relative mb-20 experience-section">
+                <section id="experiencia" class="relative mb-12 experience-section">
                     <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
                         <div class="hidden lg:block lg:col-span-1 reveal"><p class="section-title glitch-vertical" data-text="Experiencia">Experiencia</p></div>
                         <div class="lg:col-span-11 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                            <div class="md:col-span-4 self-start reveal">
                                 <div class="space-y-2">
-                                    <button data-tab-button="experiencia" data-tab-target="experiencia-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="monde petit studio logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Monde Petit Studio"><div><p class="font-bold text-lg text-black">Monde Petit Studio</p><p class="text-sm">Jun 2025 - Ago 2025</p></div></div></button>
-                                    <button data-tab-button="experiencia" data-tab-target="experiencia-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="last don spa logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Inversiones Last Don"><div><p class="font-bold text-lg text-black">Inversiones Last Don SPA</p><p class="text-sm">May 2024 - Jun 2024</p></div></div></button>
-                                    <button data-tab-button="experiencia" data-tab-target="experiencia-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="manpowergroupchile logo.jpg" class="w-10 h-10 rounded-full object-cover" alt="Logo ManpowerGroup"><div><p class="font-bold text-lg text-black">ManpowerGroup Chile</p><p class="text-sm">Nov 2024 - Ene 2025</p></div></div></button>
-                                    <button data-tab-button="experiencia" data-tab-target="experiencia-4" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="agq labs logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo AGQ Labs"><div><p class="font-bold text-lg text-black">AGQ Labs</p><p class="text-sm">Dic 2020 - Ene 2021</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=MP" class="w-10 h-10 rounded-full object-cover" alt="Logo Monde Petit Studio"><div><p class="font-bold text-lg text-black">Monde Petit Studio</p><p class="text-sm">Jun 2025 - Ago 2025</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=LD" class="w-10 h-10 rounded-full object-cover" alt="Logo Inversiones Last Don"><div><p class="font-bold text-lg text-black">Inversiones Last Don SPA</p><p class="text-sm">May 2024 - Jun 2024</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=MG" class="w-10 h-10 rounded-full object-cover" alt="Logo ManpowerGroup"><div><p class="font-bold text-lg text-black">ManpowerGroup Chile</p><p class="text-sm">Nov 2024 - Ene 2025</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-4" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=AGQ" class="w-10 h-10 rounded-full object-cover" alt="Logo AGQ Labs"><div><p class="font-bold text-lg text-black">AGQ Labs</p><p class="text-sm">Dic 2020 - Ene 2021</p></div></div></button>
                                 </div>
                            </div>
                            <div class="md:col-span-8 self-start reveal" style="transition-delay: 150ms;">
@@ -366,29 +315,28 @@
                </section>
             </div>
             
-            <section id="habilidades" class="mb-20 overflow-hidden">
-                <div class="marquee-wrapper py-12">
+            <section id="habilidades" class="mb-12 overflow-hidden">
+                <div class="marquee-wrapper py-12 reveal">
                     <div class="marquee">
                         <div id="marquee-content" class="marquee-content">
-                            <!-- Icons will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
             </section>
     
             <div class="px-6 sm:px-10 max-w-8xl mx-auto">
-                 <section id="formacion" class="relative mb-20 experience-section">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
-                        <div class="hidden lg:block lg:col-span-1 reveal"><p class="section-title glitch-vertical" data-text="Formación">Formación</p></div>
+                 <section id="formacion" class="relative mb-12 experience-section">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 reveal">
+                        <div class="hidden lg:block lg:col-span-1"><p class="section-title glitch-vertical" data-text="Formación">Formación</p></div>
                         <div class="lg:col-span-11 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                            <div class="md:col-span-4 self-start reveal">
+                            <div class="md:col-span-4 self-start">
                                 <div class="space-y-2">
-                                     <button data-tab-button="formacion" data-tab-target="formacion-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="DUOC UC logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo DUOC UC"><div><p class="font-bold text-lg text-black">Ingeniería en Informática</p><p class="text-sm">DUOC UC (En curso)</p></div></div></button>
-                                     <button data-tab-button="formacion" data-tab-target="formacion-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="liceo polivalente san andres de colina logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Liceo Polivalente"><div><p class="font-bold text-lg text-black">Químico Industrial</p><p class="text-sm">Liceo Polivalente San Andrés</p></div></div></button>
-                                     <button data-tab-button="formacion" data-tab-target="formacion-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="certificaciones logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Certificaciones"><div><p class="font-bold text-lg text-black">Certificaciones</p><p class="text-sm">Agile & English</p></div></div></button>
+                                     <button data-tab-button="formacion" data-tab-target="formacion-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=DUOC" class="w-10 h-10 rounded-full object-cover" alt="Logo DUOC UC"><div><p class="font-bold text-lg text-black">Ingeniería en Informática</p><p class="text-sm">DUOC UC (En curso)</p></div></div></button>
+                                     <button data-tab-button="formacion" data-tab-target="formacion-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=LP" class="w-10 h-10 rounded-full object-cover" alt="Logo Liceo Polivalente"><div><p class="font-bold text-lg text-black">Químico Industrial</p><p class="text-sm">Liceo Polivalente San Andrés</p></div></div></button>
+                                     <button data-tab-button="formacion" data-tab-target="formacion-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="https://placehold.co/40x40/EEE/31343C?text=C" class="w-10 h-10 rounded-full object-cover" alt="Logo Certificaciones"><div><p class="font-bold text-lg text-black">Certificaciones</p><p class="text-sm">Agile & English</p></div></div></button>
                                 </div>
                             </div>
-                            <div class="md:col-span-8 self-start reveal" style="transition-delay: 150ms;">
+                            <div class="md:col-span-8 self-start" style="transition-delay: 150ms;">
                                  <div id="formacion-1" class="tab-content active"><h4 class="text-2xl font-bold">Ingeniería en Informática <span class="text-lg text-blue-700 font-semibold">@ DUOC UC</span></h4><p class="text-gray-500 font-semibold mt-1">En curso</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-700 mr-3 mt-1 flex-shrink-0"></i><span>Cursos relevantes: Análisis de Requerimientos, Inteligencia de Negocios, Calidad de Software, Arquitectura de Software.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-700 mr-3 mt-1 flex-shrink-0"></i><span>Especialización en Gestión de Proyectos Informáticos y desarrollo de soluciones empresariales.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Institución</h5><p class="text-sm text-gray-300">Duoc UC es un instituto profesional de educación superior, con un fuerte enfoque en la formación técnica y profesional.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Áreas de Enfoque</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="git-pull-request" class="w-4 h-4 mr-2 text-blue-400"></i>Arquitectura</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="briefcase" class="w-4 h-4 mr-2 text-blue-400"></i>Business Intel.</span></div></div></div></div></div></div>
                                  <div id="formacion-2" class="tab-content"><h4 class="text-2xl font-bold">Químico Industrial <span class="text-lg text-gray-600 font-semibold">@ Liceo Polivalente San Andrés</span></h4><p class="text-gray-500 font-semibold mt-1">Completado</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-gray-600 mr-3 mt-1 flex-shrink-0"></i><span>Mención en Laboratorio Químico.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-gray-600 mr-3 mt-1 flex-shrink-0"></i><span>Enfoque en bioseguridad y Buenas Prácticas de Laboratorio (BPL).</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="award" class="w-4 h-4 mr-2"></i>Logros Destacados</h5><p class="text-sm text-gray-300">Práctica profesional con calificación máxima en laboratorio AGQ Labs.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="shield" class="w-4 h-4 mr-2 text-gray-400"></i>Bioseguridad</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="award" class="w-4 h-4 mr-2 text-gray-400"></i>BPL</span></div></div></div></div></div></div>
                                  <div id="formacion-3" class="tab-content"><h4 class="text-2xl font-bold">Certificaciones <span class="text-lg text-pink-500 font-semibold">@ Agile & English</span></h4><p class="text-gray-500 font-semibold mt-1">Autodidacta y formal</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-pink-500 mr-3 mt-1 flex-shrink-0"></i><span>Scrum Fundamentals Certified (SFC™) por ScrumStudy.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-pink-500 mr-3 mt-1 flex-shrink-0"></i><span>Nivel de Inglés Intermedio (TOEIC Bridge), demostrando competencia comunicativa en contextos profesionales.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="award" class="w-4 h-4 mr-2"></i>Sobre las Certificaciones</h5><p class="text-sm text-gray-300">Validación de conocimientos en metodologías ágiles y competencia en el idioma inglés.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="users" class="w-4 h-4 mr-2 text-pink-400"></i>Agile</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="message-circle" class="w-4 h-4 mr-2 text-pink-400"></i>Comunicación</span></div></div></div></div></div></div>
@@ -407,12 +355,12 @@
                         <h2 class="text-5xl md:text-7xl font-black leading-none tracking-tighter mt-2"><a href="mailto:onlineprivado@duck.com" class="hover:text-indigo-400 transition-colors">Hablemos.</a></h2>
                     </div>
                      <div class="flex flex-col justify-end items-start md:items-end text-left md:text-right">
-                         <p class="text-lg font-bold">Información de Contacto</p>
-                         <p class="text-gray-300 mt-2">Región Metropolitana, Chile</p>
-                         <div class="flex items-center space-x-6 mt-4">
-                              <a href="https://github.com/JordyLizana" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                              <a href="https://www.linkedin.com/in/jordy-lizana-alvarez-27a08b223" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                         </div>
+                        <p class="text-lg font-bold">Información de Contacto</p>
+                        <p class="text-gray-300 mt-2">Región Metropolitana, Chile</p>
+                        <div class="flex items-center space-x-6 mt-4">
+                             <a href="https://github.com/JordyLizana" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                             <a href="https://www.linkedin.com/in/jordy-lizana-alvarez-27a08b223" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        </div>
                     </div>
                 </div>
                  <div class="mt-16 pt-6 border-t border-gray-800 text-sm text-center text-gray-500">
@@ -427,7 +375,67 @@
         feather.replace();
 
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Mobile Menu Toggle ---
+            const projectsData = [
+                {
+                    category: 'trabajo',
+                    image: 'https://placehold.co/600x400/EEE/31343C?text=Monde+Petit',
+                    alt: 'Proyecto Monde Petit Studio',
+                    type: 'Desarrollo Web & rediseño',
+                    title: 'Monde Petit Studio',
+                    delay: '0ms',
+                    buttons: [
+                        { text: 'Ver pagina web', href: 'https://mondepetit.cl/', primary: true }
+                    ]
+                },
+                {
+                    category: 'proyecto',
+                    image: 'https://placehold.co/600x400/EEE/31343C?text=Dashboard',
+                    alt: 'Proyecto Dashboard',
+                    type: 'Desarrollo web',
+                    title: 'Dashboard Financiero',
+                    delay: '100ms',
+                    buttons: [
+                        { text: 'Ver Demo', href: 'https://jordylizana.github.io/Dashboard-Financiero/login.html', primary: true },
+                        { text: 'Ver Código', href: 'https://github.com/JordyLizana/Dashboard-Financiero', primary: false }
+                    ]
+                },
+                {
+                    category: 'proyecto',
+                    image: 'https://placehold.co/600x400/EEE/31343C?text=Smash+Apples',
+                    alt: 'Proyecto Smash-Apples',
+                    type: 'Diseño y funcionalidad',
+                    title: 'Smash-Apples',
+                    delay: '200ms',
+                    buttons: [
+                        { text: 'Ver Demo', href: 'https://jordylizana.github.io/Smash-Apples-/', primary: true },
+                        { text: 'Ver Código', href: 'https://github.com/JordyLizana/Smash-Apples-', primary: false }
+                    ]
+                },
+                {
+                    category: 'diseno',
+                    image: 'https://placehold.co/600x400/EEE/31343C?text=Portafolio+Web',
+                    alt: 'Proyecto Portafolio',
+                    type: 'Desarrollo, diseño & funcionalidad',
+                    title: 'Portafolio Web',
+                    delay: '300ms',
+                    buttons: [
+                        { text: 'Ver Código', href: 'https://github.com/JordyLizana/JL-dev', primary: false }
+                    ]
+                },
+                {
+                    category: 'diseno',
+                    image: 'https://placehold.co/600x400/EEE/31343C?text=Portafolio+Creativo',
+                    alt: 'Proyecto Portafolio',
+                    type: 'Diseño',
+                    title: 'Portafolio Creativo',
+                    delay: '400ms',
+                    buttons: [
+                        { text: 'Ver Código', href: 'https://github.com/JordyLizana/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo', primary: false },
+                        { text: 'Ver Demo', href: 'https://jordylizana.github.io/Habitat-de-Lujo---Portafolio-Creativo-de-Dise-o-y-Desarrollo/', primary: true }
+                    ]
+                }
+            ];
+
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuIcon = mobileMenuButton.querySelector('i');
@@ -439,7 +447,6 @@
                 feather.replace();
             });
 
-            // --- Smooth Scrolling for all anchor links ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -447,11 +454,7 @@
                     const targetElement = document.querySelector(targetId);
 
                     if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         if (!mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                             mobileMenuIcon.setAttribute('data-feather', 'menu');
@@ -461,65 +464,84 @@
                 });
             });
 
-            // --- Horizontal Scroll & Project Filtering ---
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            function applyRevealObserver() {
+                document.querySelectorAll('.reveal').forEach(elem => {
+                    revealObserver.observe(elem);
+                });
+            }
+            
+            const projectsContainer = document.getElementById('projects-container');
+            const projectCardContainer = projectsContainer.querySelector('.inline-flex');
+            const filterButtons = document.querySelectorAll('#project-filter .filter-btn');
             const scrollBtnLeft = document.getElementById('scroll-btn-left');
             const scrollBtnRight = document.getElementById('scroll-btn-right');
-            const horizontalContainer = document.getElementById('horizontal-container');
-            
-            if (horizontalContainer) {
-                const projectCards = document.querySelectorAll('#horizontal-container .project-card');
-                const filterButtons = document.querySelectorAll('#project-filter .filter-btn');
 
-                const handleScrollButtonsState = () => {
-                    // Use a short timeout to allow the DOM to update after filtering
-                    setTimeout(() => {
-                        const isScrollable = horizontalContainer.scrollWidth > horizontalContainer.clientWidth;
-                        
-                        scrollBtnLeft.style.display = isScrollable ? '' : 'none';
-                        scrollBtnRight.style.display = isScrollable ? '' : 'none';
-                        
-                        // This media query check ensures they are hidden on mobile regardless
-                        if (window.innerWidth < 1024) {
-                            scrollBtnLeft.style.display = 'none';
-                            scrollBtnRight.style.display = 'none';
-                        }
-                        
-                        scrollBtnLeft.disabled = horizontalContainer.scrollLeft <= 0;
-                        scrollBtnRight.disabled = horizontalContainer.scrollLeft + horizontalContainer.clientWidth >= horizontalContainer.scrollWidth - 1;
-                    }, 500); // Increased timeout to match CSS transition
-                };
-                
-                scrollBtnLeft.addEventListener('click', () => { horizontalContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
-                scrollBtnRight.addEventListener('click', () => { horizontalContainer.scrollBy({ left: 360, behavior: 'smooth' }); });
-                horizontalContainer.addEventListener('scroll', handleScrollButtonsState);
-                window.addEventListener('resize', handleScrollButtonsState);
+            function renderProjects(filter = 'all') {
+                projectCardContainer.innerHTML = ''; 
+                const filteredProjects = projectsData.filter(p => filter === 'all' || p.category === filter);
 
-                // --- Filter Logic ---
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const filterValue = button.dataset.filter;
-                        
-                        filterButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
+                filteredProjects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = `project-card reveal p-4 rounded-lg border border-gray-100`;
+                    card.setAttribute('data-category', project.category);
+                    card.style.transitionDelay = project.delay;
 
-                        projectCards.forEach(card => {
-                             if (filterValue === 'all' || card.dataset.category === filterValue) {
-                                card.classList.remove('filtered-out');
-                            } else {
-                                card.classList.add('filtered-out');
-                            }
-                        });
+                    let buttonsHTML = project.buttons.map(btn => {
+                        const primaryClasses = 'bg-black text-white hover:bg-gray-800';
+                        const secondaryClasses = 'bg-white text-black border border-gray-300 hover:bg-gray-100';
+                        return `<a href="${btn.href}" target="_blank" class="${btn.primary ? primaryClasses : secondaryClasses} text-sm font-semibold py-2 px-4 rounded-md transition-colors">${btn.text}</a>`;
+                    }).join('');
 
-                        horizontalContainer.scrollLeft = 0; // Reset scroll on filter change
-                        handleScrollButtonsState();
-                    });
+                    card.innerHTML = `
+                        <div class="overflow-hidden rounded-md">
+                            <img src="${project.image}" alt="${project.alt}" class="w-full h-40 object-cover project-card-image">
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4">${project.type}</p>
+                        <h4 class="text-2xl font-bold mt-1">${project.title}</h4>
+                        <div class="mt-auto pt-4 flex space-x-3">${buttonsHTML}</div>
+                    `;
+                    projectCardContainer.appendChild(card);
                 });
-                
-                // Initial state on load
+
+                feather.replace();
                 handleScrollButtonsState();
+                applyRevealObserver();
             }
 
-            // --- Tabs functionality ---
+            const handleScrollButtonsState = () => {
+                setTimeout(() => {
+                    const isScrollable = projectsContainer.scrollWidth > projectsContainer.clientWidth;
+                    const showButtons = isScrollable && window.innerWidth >= 1024;
+                    scrollBtnLeft.style.display = showButtons ? 'flex' : 'none';
+                    scrollBtnRight.style.display = showButtons ? 'flex' : 'none';
+                    scrollBtnLeft.disabled = projectsContainer.scrollLeft <= 0;
+                    scrollBtnRight.disabled = projectsContainer.scrollLeft + projectsContainer.clientWidth >= projectsContainer.scrollWidth - 1;
+                }, 450);
+            };
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.dataset.filter;
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    projectsContainer.scrollLeft = 0;
+                    renderProjects(filterValue);
+                });
+            });
+
+            scrollBtnLeft.addEventListener('click', () => { projectsContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
+            scrollBtnRight.addEventListener('click', () => { projectsContainer.scrollBy({ left: 360, behavior: 'smooth' }); });
+            projectsContainer.addEventListener('scroll', handleScrollButtonsState);
+            window.addEventListener('resize', handleScrollButtonsState);
+            
             function setupTabs(containerId) {
                 const container = document.getElementById(containerId);
                 if (!container) return;
@@ -530,12 +552,9 @@
                 tabButtons.forEach(button => {
                     button.addEventListener('click', () => {
                         const targetId = button.dataset.tabTarget;
-            
                         tabButtons.forEach(btn => btn.classList.remove('active'));
                         tabContents.forEach(content => content.classList.remove('active'));
-            
                         button.classList.add('active');
-            
                         const targetContent = container.querySelector(`#${targetId}`);
                         if (targetContent) {
                             targetContent.classList.add('active');
@@ -547,24 +566,15 @@
             setupTabs('experiencia');
             setupTabs('formacion');
 
-            // --- Marquee skills icons population ---
             const marqueeContent = document.getElementById('marquee-content');
             if(marqueeContent) {
                 const skills = [
-                    { name: 'HTML5', icon: 'code' },
-                    { name: 'CSS3', icon: 'figma' },
-                    { name: 'JavaScript', icon: 'zap' },
-                    { name: 'PHP', icon: 'cpu' },
-                    { name: 'GitHub', icon: 'github' },
-                    { name: 'WordPress', icon: 'layout' },
-                    { name: 'SEO', icon: 'trending-up' },
-                    { name: 'Scrum', icon: 'users' },
-                    { name: 'TailwindCSS', icon: 'wind' },
+                    { name: 'HTML5', icon: 'code' }, { name: 'CSS3', icon: 'figma' }, { name: 'JavaScript', icon: 'zap' },
+                    { name: 'PHP', icon: 'cpu' }, { name: 'GitHub', icon: 'github' }, { name: 'WordPress', icon: 'layout' },
+                    { name: 'SEO', icon: 'trending-up' }, { name: 'Scrum', icon: 'users' }, { name: 'TailwindCSS', icon: 'wind' },
                     { name: 'MySQL', icon: 'database' },
                 ];
-
                 const allSkills = [...skills, ...skills, ...skills, ...skills];
-
                 let skillsHTML = '';
                 allSkills.forEach(skill => {
                     skillsHTML += `
@@ -577,17 +587,9 @@
                 marqueeContent.innerHTML = skillsHTML;
                 feather.replace();
             }
-        
-            // --- Scroll reveal animation ---
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            revealElements.forEach(elem => { revealObserver.observe(elem); });
+
+            renderProjects();
+            applyRevealObserver();
 
         });
     </script>
