@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/icon.png">
+    <title>Portafolio | Jordy Lizana Álvarez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --background: #FFFFFF;
+            --foreground: #212121;
+            --gray: #6b7280;
+            --gray-light: #f3f4f6;
+            --gray-border: #e5e7eb;
+            --accent: #111827;
+            --indigo: #4f46e5;
+            --pink: #ec4899;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        header {
+            transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        }
+        .horizontal-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .project-card {
+            background-color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .project-card-image {
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover .project-card-image {
+            transform: scale(1.03);
+        }
+        .section-title {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: var(--foreground);
+            font-weight: 900;
+            font-size: 6rem;
+            line-height: 0.9;
+            user-select: none;
+            position: relative;
+        }
+        
+        /* Glitch Effect */
+        .glitch-effect, .glitch-vertical {
+            position: relative;
+            font-weight: 900;
+        }
+        .glitch-effect::before, .glitch-effect::after,
+        .glitch-vertical::before, .glitch-vertical::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--background);
+        }
+        .glitch-vertical::before, .glitch-vertical::after {
+            writing-mode: vertical-rl;
+        }
+        .glitch-effect::before, .glitch-vertical::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--indigo);
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+        }
+        .glitch-effect::after, .glitch-vertical::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--pink);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(45% 0 50% 0); } 5% { clip-path: inset(85% 0 2% 0); } 10% { clip-path: inset(65% 0 25% 0); } 15% { clip-path: inset(30% 0 62% 0); } 20% { clip-path: inset(95% 0 2% 0); } 25% { clip-path: inset(40% 0 55% 0); } 30% { clip-path: inset(70% 0 22% 0); } 35% { clip-path: inset(85% 0 10% 0); } 40% { clip-path: inset(25% 0 70% 0); } 45% { clip-path: inset(90% 0 5% 0); } 50% { clip-path: inset(2% 0 90% 0); } 55% { clip-path: inset(55% 0 35% 0); } 60% { clip-path: inset(10% 0 85% 0); } 65% { clip-path: inset(75% 0 5% 0); } 70% { clip-path: inset(20% 0 75% 0); } 75% { clip-path: inset(60% 0 30% 0); } 80% { clip-path: inset(90% 0 8% 0); } 85% { clip-path: inset(15% 0 80% 0); } 90% { clip-path: inset(50% 0 42% 0); } 95% { clip-path: inset(22% 0 70% 0); } 100% { clip-path: inset(80% 0 15% 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(95% 0 2% 0); } 5% { clip-path: inset(5% 0 92% 0); } 10% { clip-path: inset(80% 0 5% 0); } 15% { clip-path: inset(40% 0 58% 0); } 20% { clip-path: inset(15% 0 82% 0); } 25% { clip-path: inset(70% 0 20% 0); } 30% { clip-path: inset(90% 0 8% 0); } 35% { clip-path: inset(10% 0 88% 0); } 40% { clip-path: inset(50% 0 45% 0); } 45% { clip-path: inset(20% 0 75% 0); } 50% { clip-path: inset(88% 0 2% 0); } 55% { clip-path: inset(35% 0 60% 0); } 60% { clip-path: inset(70% 0 25% 0); } 65% { clip-path: inset(5% 0 90% 0); } 70% { clip-path: inset(85% 0 10% 0); } 75% { clip-path: inset(30% 0 65% 0); } 80% { clip-path: inset(10% 0 82% 0); } 85% { clip-path: inset(65% 0 30% 0); } 90% { clip-path: inset(92% 0 5% 0); } 95% { clip-path: inset(28% 0 70% 0); } 100% { clip-path: inset(10% 0 85% 0); }
+        }
+
+        /* Marquee styles */
+        .marquee-wrapper {
+            background-color: #000;
+            position: relative;
+        }
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            animation: marquee 25s linear infinite;
+        }
+        .marquee:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        .skill-icon-group {
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .skill-icon {
+            color: #9ca3af;
+            transition: all 0.2s ease-in-out;
+        }
+        .skill-icon-group:hover .skill-icon {
+            transform: scale(1.1);
+            color: white;
+            filter: drop-shadow(0 0 8px var(--indigo));
+        }
+
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* Tabs Styles */
+        .tab-button {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .tab-button.active {
+            color: var(--foreground);
+            background-color: var(--gray-light);
+        }
+        .tab-button.active::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 70%;
+            background-color: var(--accent);
+            border-radius: 99px;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Animation on scroll */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div class="w-full">
+        <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md">
+            <div class="max-w-8xl mx-auto px-6 sm:px-10 flex justify-between items-center py-4 border-b border-gray-100">
+                <a href="#sobre-mi" class="flex items-center space-x-2 group">
+                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-black group-hover:text-indigo-600 transition-colors">
+                         <path d="M8 3V15.5C8 16.8807 9.11929 18 10.5 18H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M16 21L16 3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     </svg>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center space-x-10 text-sm font-bold tracking-widest uppercase">
+                    <a href="#proyectos" class="text-gray-500 hover:text-black transition-colors">Proyectos</a>
+                    <a href="#experiencia" class="text-gray-500 hover:text-black transition-colors">Experiencia</a>
+                    <a href="#habilidades" class="text-gray-500 hover:text-black transition-colors">Habilidades</a>
+                    <a href="#contacto" class="text-black hover:text-indigo-600 transition-colors">Contacto</a>
+                </nav>
+                <a href="mailto:onlineprivado@duck.com" class="hidden sm:block group">
+                    <i data-feather="mail" class="h-6 w-6 text-gray-500 group-hover:text-black transition-colors"></i>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-black">
+                        <i data-feather="menu" class="h-7 w-7"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+                <nav class="flex flex-col items-center space-y-6 py-8 text-lg font-bold">
+                    <a href="#proyectos" class="text-gray-600 hover:text-black transition-colors">Proyectos</a>
+                    <a href="#experiencia" class="text-gray-600 hover:text-black transition-colors">Experiencia</a>
+                    <a href="#habilidades" class="text-gray-600 hover:text-black transition-colors">Habilidades</a>
+                    <a href="#contacto" class="text-black hover:text-indigo-600 transition-colors">Contacto</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="pt-24 lg:pt-32">
+            <div class="px-6 sm:px-10 max-w-8xl mx-auto">
+                <section id="sobre-mi" class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative mb-20">
+                    <div class="reveal text-center lg:text-left">
+                        <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter glitch-effect" data-text="Desarrollador Web">Desarrollador Web</h2>
+                        <p class="mt-6 text-gray-500 max-w-lg mx-auto lg:mx-0">Estudiante de último año de Ingeniería en Informática con enfoque en desarrollo web, optimización SEO y manejo de datos. Mi objetivo es integrarme a equipos de tecnología para aportar valor y continuar mi desarrollo profesional.</p>
+                        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+                            <div class="border-l-2 border-gray-200 pl-4">
+                                <p class="text-3xl font-bold">1+</p>
+                                <p class="text-gray-500 text-sm">Años de Experiencia</p>
+                            </div>
+                            <div class="border-l-2 border-gray-200 pl-4">
+                                <p class="text-3xl font-bold">4+</p>
+                                <p class="text-gray-500 text-sm">Proyectos Realizados</p>
+                            </div>
+                            <div class="border-l-2 border-gray-200 pl-4">
+                                <p class="text-3xl font-bold">SFC™</p>
+                                <p class="text-gray-500 text-sm">Certificación Scrum</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative reveal" style="transition-delay: 150ms;">
+                        <div class="bg-black text-white p-8 rounded-lg">
+                            <h3 class="text-3xl lg:text-4xl font-bold">Detalles</h3>
+                            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+                                <div><p class="text-gray-400 uppercase tracking-widest">Rol</p><p class="font-bold">Front-End Developer</p></div>
+                                <div><p class="text-gray-400 uppercase tracking-widest">Ubicación</p><p class="font-bold">Región Metropolitana, Chile</p></div>
+                                <div><p class="text-gray-400 uppercase tracking-widest">Idiomas</p><p class="font-bold">Español, Inglés (Intermedio)</p></div>
+                                <div><p class="text-gray-400 uppercase tracking-widest">Estado</p><p class="font-bold text-green-400">Disponible</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="proyectos" class="mb-20">
+                    <div class="flex justify-between items-center mb-8 reveal">
+                        <h3 class="text-sm font-bold tracking-widest uppercase">Proyectos Destacados</h3>
+                    </div>
+                    <div class="relative group">
+                        <button id="scroll-btn-left" class="absolute top-1/2 -translate-y-1/2 -left-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-left-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
+                            <i data-feather="arrow-left" class="h-6 w-6"></i>
+                        </button>
+                        <div id="horizontal-container" class="flex items-stretch overflow-x-auto space-x-10 horizontal-scroll pb-10 scroll-smooth">
+                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100"><div class="overflow-hidden rounded-md"><img src="/03.png" alt="Proyecto Monde Petit Studio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo Web & rediseño</p><h4 class="text-2xl font-bold mt-1">Monde Petit Studio</h4><div class="mt-4 flex space-x-3"><a href="https://mondepetit.cl/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver pagina web</a></div></div>
+                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 100ms;"><div class="overflow-hidden rounded-md"><img src="/01.png" alt="Proyecto Dashboard" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo web</p><h4 class="text-2xl font-bold mt-1">Dashboard Financiero</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Dashboard-Financiero/login.html" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Dashboard-Financiero" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 200ms;"><div class="overflow-hidden rounded-md"><img src="/02.png" alt="Proyecto Smash-Apples" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Diseño y funcionalidad</p><h4 class="text-2xl font-bold mt-1">Smash-Apples</h4><div class="mt-4 flex space-x-3"><a href="https://jordylizana.github.io/Smash-Apples-/" target="_blank" class="bg-black text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">Ver Demo</a><a href="https://github.com/JordyLizana/Smash-Apples-" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                            <div class="flex-shrink-0 w-80 project-card reveal p-4 rounded-lg border border-gray-100" style="transition-delay: 300ms;"><div class="overflow-hidden rounded-md"><img src="/04.png" alt="Proyecto Portafolio" class="w-full h-40 object-cover project-card-image"></div><p class="text-gray-400 text-sm mt-4">Desarrollo, diseño & funcionalidad</p><h4 class="text-2xl font-bold mt-1">Portafolio Web</h4><div class="mt-4 flex space-x-3"><a href="https://github.com/JordyLizana/Portafolio" target="_blank" class="bg-white text-black border border-gray-300 text-sm font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">Ver Código</a></div></div>
+                        </div>
+                        <button id="scroll-btn-right" class="absolute top-1/2 -translate-y-1/2 -right-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 group-hover:-right-6 hover:!opacity-100 hover:bg-white disabled:opacity-0 disabled:cursor-not-allowed">
+                            <i data-feather="arrow-right" class="h-6 w-6"></i>
+                        </button>
+                    </div>
+                </section>
+    
+                <!-- Elegant Separator -->
+                <div class="flex justify-center items-center my-20 reveal">
+                    <svg width="300" height="20" viewBox="0 0 300 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-900">
+                        <path d="M0 10H120" stroke="url(#grad1)" stroke-width="1.5"/>
+                        <path d="M180 10H300" stroke="url(#grad2)" stroke-width="1.5"/>
+                        <path d="M125 5C138.807 5 150 7.23858 150 10C150 12.7614 138.807 15 125 15C111.193 15 100 12.7614 100 10C100 7.23858 111.193 5 125 5Z" fill="currentColor" opacity="0.1"/>
+                        <path d="M129.742 14.3273C135.536 12.4182 143.435 10.8727 150 10.8727C156.565 10.8727 164.464 12.4182 170.258 14.3273M129.742 5.67273C135.536 7.58182 143.435 9.12727 150 9.12727C156.565 9.12727 164.464 7.58182 170.258 5.67273" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="120" y1="10" x2="0" y2="10" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="currentColor"/>
+                                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+                            </linearGradient>
+                             <linearGradient id="grad2" x1="180" y1="10" x2="300" y2="10" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="currentColor"/>
+                                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+    
+    
+                <section id="experiencia" class="relative mb-20 experience-section">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
+                        <div class="hidden lg:block lg:col-span-1 reveal"><p class="section-title glitch-vertical" data-text="Experiencia">Experiencia</p></div>
+                        <div class="lg:col-span-11 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                           <div class="md:col-span-4 self-start reveal">
+                                <div class="space-y-2">
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="/monde petit studio logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Monde Petit Studio"><div><p class="font-bold text-lg text-black">Monde Petit Studio</p><p class="text-sm">Jun 2025 - Ago 2025</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="/last don spa logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Inversiones Last Don"><div><p class="font-bold text-lg text-black">Inversiones Last Don SPA</p><p class="text-sm">May 2024 - Jun 2024</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="/manpowergroupchile logo.jpg" class="w-10 h-10 rounded-full object-cover" alt="Logo ManpowerGroup"><div><p class="font-bold text-lg text-black">ManpowerGroup Chile</p><p class="text-sm">Nov 2024 - Ene 2025</p></div></div></button>
+                                    <button data-tab-button="experiencia" data-tab-target="experiencia-4" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="/agq labs logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo AGQ Labs"><div><p class="font-bold text-lg text-black">AGQ Labs</p><p class="text-sm">Dic 2020 - Ene 2021</p></div></div></button>
+                                </div>
+                           </div>
+                           <div class="md:col-span-8 self-start reveal" style="transition-delay: 150ms;">
+                                <div id="experiencia-1" class="tab-content active"><h4 class="text-2xl font-bold">Practicante de Informática <span class="text-lg text-indigo-500 font-semibold">@ Monde Petit Studio</span></h4><p class="text-gray-500 font-semibold mt-1">Desarrollo Web & SEO</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i><span>Optimización SEO integral para mejorar el ranking en buscadores.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i><span>Gestión de contenidos dinámicos.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i><span>Desarrollo Front-End con foco en la experiencia de usuario, aplicando HTML5, CSS y JavaScript para interfaces interactivas.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"> <h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Empresa</h5><p class="text-sm text-gray-300">Monde Petit es una constructora boutique enfocada en proyectos de interior y exterior.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2"></i>Stack Tecnológico</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="trending-up" class="w-4 h-4 mr-2 text-indigo-400"></i>SEO</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="code" class="w-4 h-4 mr-2 text-indigo-400"></i>HTML/CSS</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="layout" class="w-4 h-4 mr-2 text-indigo-400"></i>WordPress</span></div></div></div></div></div></div>
+                                <div id="experiencia-2" class="tab-content"><h4 class="text-2xl font-bold">Practicante de Informática <span class="text-lg text-amber-500 font-semibold">@ Inversiones Last Don SPA</span></h4><p class="text-gray-500 font-semibold mt-1">Gestión de Datos & E-commerce</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-amber-500 mr-3 mt-1 flex-shrink-0"></i><span>Gestión y normalización de bases de datos de más de 1,000 productos en Microsoft Excel.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-amber-500 mr-3 mt-1 flex-shrink-0"></i><span>Optimización de la estructura de categorías y productos en la plataforma de e-commerce.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-amber-500 mr-3 mt-1 flex-shrink-0"></i><span>Implementación de sistema de códigos de barras para agilizar el proceso de picking y packing.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"> <h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Empresa</h5><p class="text-sm text-gray-300">Empresa dedicada a la comercialización y distribución de productos de consumo masivo a nivel nacional.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2"></i>Stack Tecnológico</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="file-text" class="w-4 h-4 mr-2 text-amber-400"></i>Excel</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="database" class="w-4 h-4 mr-2 text-amber-400"></i>Data Entry</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="shopping-cart" class="w-4 h-4 mr-2 text-amber-400"></i>E-commerce</span></div></div></div></div></div></div>
+                                <div id="experiencia-3" class="tab-content"><h4 class="text-2xl font-bold">Prestador de Servicios <span class="text-lg text-blue-800 font-semibold">@ ManpowerGroup Chile</span></h4><p class="text-gray-500 font-semibold mt-1">Logística y Bodega</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-800 mr-3 mt-1 flex-shrink-0"></i><span>Control de inventarios y registro sistemático de stock.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-800 mr-3 mt-1 flex-shrink-0"></i><span>Preparación y distribución de pedidos (picking y embalaje).</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-800 mr-3 mt-1 flex-shrink-0"></i><span>Cumplimiento de normas de seguridad y uso de EPP.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"> <h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Empresa</h5><p class="text-sm text-gray-300">ManpowerGroup es una empresa líder a nivel mundial en soluciones de capital humano.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="truck" class="w-4 h-4 mr-2 text-blue-500"></i>Logística</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="archive" class="w-4 h-4 mr-2 text-blue-500"></i>Inventario</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="shield" class="w-4 h-4 mr-2 text-blue-500"></i>Seguridad</span></div></div></div></div></div></div>
+                                <div id="experiencia-4" class="tab-content"><h4 class="text-2xl font-bold">Practicante de Laboratorio <span class="text-lg text-green-600 font-semibold">@ AGQ Labs</span></h4><p class="text-gray-500 font-semibold mt-1">Análisis Químico & Bioseguridad</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0"></i><span>Manejo de muestras y protocolos de bioseguridad.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0"></i><span>Mantenimiento y esterilización de equipamiento de laboratorio.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0"></i><span>Aplicación de Buenas Prácticas de Laboratorio (BPL).</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"> <h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Empresa</h5><p class="text-sm text-gray-300">AGQ Labs es un centro tecnológico internacional con implantación en más de 20 países.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="shield" class="w-4 h-4 mr-2 text-green-500"></i>Bioseguridad</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="bar-chart-2" class="w-4 h-4 mr-2 text-green-500"></i>Análisis Químico</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="award" class="w-4 h-4 mr-2 text-green-500"></i>BPL</span></div></div></div></div></div></div>
+                           </div>
+                        </div>
+                    </div>
+               </section>
+            </div>
+            
+            <section id="habilidades" class="mb-20 overflow-hidden">
+                <div class="marquee-wrapper py-12">
+                    <div class="marquee">
+                        <div id="marquee-content" class="marquee-content">
+                            <!-- Icons will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <div class="px-6 sm:px-10 max-w-8xl mx-auto">
+                 <section id="formacion" class="relative mb-20 experience-section">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-8">
+                        <div class="hidden lg:block lg:col-span-1 reveal"><p class="section-title glitch-vertical" data-text="Formación">Formación</p></div>
+                        <div class="lg:col-span-11 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                            <div class="md:col-span-4 self-start reveal">
+                                <div class="space-y-2">
+                                     <button data-tab-button="formacion" data-tab-target="formacion-1" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50 active"><div class="flex items-center space-x-3"><img src="/DUOC UC logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo DUOC UC"><div><p class="font-bold text-lg text-black">Ingeniería en Informática</p><p class="text-sm">DUOC UC (En curso)</p></div></div></button>
+                                     <button data-tab-button="formacion" data-tab-target="formacion-2" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="/liceo polivalente san andres de colina logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Liceo Polivalente"><div><p class="font-bold text-lg text-black">Químico Industrial</p><p class="text-sm">Liceo Polivalente San Andrés</p></div></div></button>
+                                     <button data-tab-button="formacion" data-tab-target="formacion-3" class="tab-button text-left w-full p-4 rounded-lg text-gray-500 hover:bg-gray-50"><div class="flex items-center space-x-3"><img src="/certificaciones logo.png" class="w-10 h-10 rounded-full object-cover" alt="Logo Certificaciones"><div><p class="font-bold text-lg text-black">Certificaciones</p><p class="text-sm">Agile & English</p></div></div></button>
+                                </div>
+                            </div>
+                            <div class="md:col-span-8 self-start reveal" style="transition-delay: 150ms;">
+                                 <div id="formacion-1" class="tab-content active"><h4 class="text-2xl font-bold">Ingeniería en Informática <span class="text-lg text-blue-700 font-semibold">@ DUOC UC</span></h4><p class="text-gray-500 font-semibold mt-1">En curso</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-700 mr-3 mt-1 flex-shrink-0"></i><span>Cursos relevantes: Análisis de Requerimientos, Inteligencia de Negocios, Calidad de Software, Arquitectura de Software.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-blue-700 mr-3 mt-1 flex-shrink-0"></i><span>Especialización en Gestión de Proyectos Informáticos y desarrollo de soluciones empresariales.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="briefcase" class="w-4 h-4 mr-2"></i>Sobre la Institución</h5><p class="text-sm text-gray-300">Duoc UC es un instituto profesional de educación superior, con un fuerte enfoque en la formación técnica y profesional.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Áreas de Enfoque</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="git-pull-request" class="w-4 h-4 mr-2 text-blue-400"></i>Arquitectura</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="briefcase" class="w-4 h-4 mr-2 text-blue-400"></i>Business Intel.</span></div></div></div></div></div></div>
+                                 <div id="formacion-2" class="tab-content"><h4 class="text-2xl font-bold">Químico Industrial <span class="text-lg text-gray-600 font-semibold">@ Liceo Polivalente San Andrés</span></h4><p class="text-gray-500 font-semibold mt-1">Completado</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-gray-600 mr-3 mt-1 flex-shrink-0"></i><span>Mención en Laboratorio Químico.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-gray-600 mr-3 mt-1 flex-shrink-0"></i><span>Enfoque en bioseguridad y Buenas Prácticas de Laboratorio (BPL).</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="award" class="w-4 h-4 mr-2"></i>Logros Destacados</h5><p class="text-sm text-gray-300">Práctica profesional con calificación máxima en laboratorio AGQ Labs.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="shield" class="w-4 h-4 mr-2 text-gray-400"></i>Bioseguridad</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="award" class="w-4 h-4 mr-2 text-gray-400"></i>BPL</span></div></div></div></div></div></div>
+                                 <div id="formacion-3" class="tab-content"><h4 class="text-2xl font-bold">Certificaciones <span class="text-lg text-pink-500 font-semibold">@ Agile & English</span></h4><p class="text-gray-500 font-semibold mt-1">Autodidacta y formal</p><ul class="space-y-3 mt-6 text-gray-700 text-base"><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-pink-500 mr-3 mt-1 flex-shrink-0"></i><span>Scrum Fundamentals Certified (SFC™) por ScrumStudy.</span></li><li class="flex items-start"><i data-feather="check-circle" class="w-5 h-5 text-pink-500 mr-3 mt-1 flex-shrink-0"></i><span>Nivel de Inglés Intermedio (TOEIC Bridge), demostrando competencia comunicativa en contextos profesionales.</span></li></ul><div class="mt-8 pt-6 border-t border-gray-100"><div class="bg-black text-white p-6 rounded-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-r border-gray-800 pr-6"><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="award" class="w-4 h-4 mr-2"></i>Sobre las Certificaciones</h5><p class="text-sm text-gray-300">Validación de conocimientos en metodologías ágiles y competencia en el idioma inglés.</p></div><div><h5 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 flex items-center"><i data-feather="box" class="w-4 h-4 mr-2"></i>Competencias Clave</h5><div class="flex flex-wrap gap-4 text-sm"><span class="flex items-center text-gray-300 font-semibold"><i data-feather="users" class="w-4 h-4 mr-2 text-pink-400"></i>Agile</span><span class="flex items-center text-gray-300 font-semibold"><i data-feather="message-circle" class="w-4 h-4 mr-2 text-pink-400"></i>Comunicación</span></div></div></div></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                 </section>
+            </div>
+        </main>
+        
+        <footer id="contacto" class="bg-black text-white">
+            <div class="max-w-8xl mx-auto px-6 sm:px-10 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-sm uppercase tracking-widest text-gray-400">¿Tienes un proyecto en mente?</p>
+                        <h2 class="text-5xl md:text-7xl font-black leading-none tracking-tighter mt-2"><a href="mailto:onlineprivado@duck.com" class="hover:text-indigo-400 transition-colors">Hablemos.</a></h2>
+                    </div>
+                     <div class="flex flex-col justify-end items-start md:items-end text-left md:text-right">
+                         <p class="text-lg font-bold">Información de Contacto</p>
+                         <p class="text-gray-300 mt-2">Región Metropolitana, Chile</p>
+                          <div class="flex items-center space-x-6 mt-4">
+                               <a href="https://github.com/JordyLizana" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                               <a href="https://www.linkedin.com/in/jordy-lizana-alvarez-27a08b223" target="_blank" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                          </div>
+                     </div>
+                </div>
+                 <div class="mt-16 pt-6 border-t border-gray-800 text-sm text-center text-gray-500">
+                     <p>Diseñado y desarrollado por Jordy Lizana Álvarez.</p>
+                 </div>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script>
+        feather.replace();
+
+        // --- Smooth scroll, mobile menu, and other functionalities ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuIcon = mobileMenuButton.querySelector('i');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between menu and x
+                const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenuIcon.setAttribute('data-feather', isMenuOpen ? 'x' : 'menu');
+                feather.replace(); // Re-render icons
+            });
+
+            // --- Smooth Scrolling for all anchor links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Close mobile menu on navigation
+                        if (!mobileMenu.classList.contains('hidden')) {
+                           mobileMenu.classList.add('hidden');
+                           mobileMenuIcon.setAttribute('data-feather', 'menu');
+                           feather.replace();
+                        }
+                    }
+                });
+            });
+
+
+            // --- Horizontal scroll for Projects ---
+            const scrollBtnLeft = document.getElementById('scroll-btn-left');
+            const scrollBtnRight = document.getElementById('scroll-btn-right');
+            const horizontalContainer = document.getElementById('horizontal-container');
+            if (horizontalContainer) {
+                const handleScrollButtons = () => {
+                    const isNotScrollable = horizontalContainer.scrollWidth <= horizontalContainer.clientWidth;
+                    if (isNotScrollable) {
+                        scrollBtnLeft.classList.add('hidden');
+                        scrollBtnRight.classList.add('hidden');
+                        return;
+                    }
+                    scrollBtnLeft.classList.remove('hidden');
+                    scrollBtnRight.classList.remove('hidden');
+                    
+                    scrollBtnLeft.disabled = horizontalContainer.scrollLeft <= 0;
+                    scrollBtnRight.disabled = horizontalContainer.scrollLeft + horizontalContainer.clientWidth >= horizontalContainer.scrollWidth - 2;
+                };
+
+                scrollBtnLeft.addEventListener('click', () => { horizontalContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
+                scrollBtnRight.addEventListener('click', () => { horizontalContainer.scrollBy({ left: 360, behavior: 'smooth' }); });
+                horizontalContainer.addEventListener('scroll', handleScrollButtons);
+                
+                window.addEventListener('load', handleScrollButtons);
+                window.addEventListener('resize', handleScrollButtons);
+            }
+
+
+            // --- Tabs functionality ---
+            function setupTabs(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+            
+                const tabButtons = container.querySelectorAll('[data-tab-button]');
+                const tabContents = container.querySelectorAll('.tab-content');
+            
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetId = button.dataset.tabTarget;
+            
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+            
+                        button.classList.add('active');
+            
+                        const targetContent = container.querySelector(`#${targetId}`);
+                        if (targetContent) {
+                            targetContent.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            setupTabs('experiencia');
+            setupTabs('formacion');
+
+            // --- Marquee skills icons population ---
+            const marqueeContent = document.getElementById('marquee-content');
+            if(marqueeContent) {
+                const skills = [
+                    { name: 'HTML5', icon: 'code' },
+                    { name: 'CSS3', icon: 'figma' },
+                    { name: 'JavaScript', icon: 'zap' },
+                    { name: 'PHP', icon: 'cpu' },
+                    { name: 'GitHub', icon: 'github' },
+                    { name: 'WordPress', icon: 'layout' },
+                    { name: 'SEO', icon: 'trending-up' },
+                    { name: 'Scrum', icon: 'users' },
+                    { name: 'TailwindCSS', icon: 'wind' },
+                    { name: 'MySQL', icon: 'database' },
+                ];
+
+                const allSkills = [...skills, ...skills, ...skills, ...skills];
+
+                let skillsHTML = '';
+                allSkills.forEach(skill => {
+                    skillsHTML += `
+                        <div class="skill-icon-group mx-6">
+                            <i data-feather="${skill.icon}" class="skill-icon mx-auto w-10 h-10"></i>
+                            <p class="text-white text-xs mt-2 font-semibold">${skill.name}</p>
+                        </div>
+                    `;
+                });
+                marqueeContent.innerHTML = skillsHTML;
+                feather.replace();
+            }
+        
+            // --- Scroll reveal animation ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(elem => { revealObserver.observe(elem); });
+
+        });
+    </script>
+</body>
+</html>
